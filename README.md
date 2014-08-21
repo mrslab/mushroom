@@ -1,4 +1,4 @@
 mushroom
 ========
 
-一个PHP开源框架，基于MVCC设计
+ An open source php application framework for PHP 5.3.0 or newer
