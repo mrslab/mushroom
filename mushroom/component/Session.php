@@ -17,16 +17,17 @@ use \mushroom\core\Core as Core;
 
 class Session extends Core implements session\IFSession {
 
-    var $config;
+    protected $config;
 
-    var $session;
+    protected $session;
 
-    var $name;
+    protected $name;
 
     public function __construct($config) {
         $this->config = $config;
         $this->name = isset($this->config['name']) ? $this->config['name'] : '_MR_SID_';
         $this->driver = isset($this->config['driver']) ? $this->config['driver'] : 'File';
+        isset($this->config['life']) ? $this->setSessionLife($this->config['life']) : '';
         $this->initSession();
         $this->start();
     }
@@ -81,5 +82,10 @@ class Session extends Core implements session\IFSession {
                 new session\File($this->config);
                 break;
         }
+    }
+
+    private function setSessionLife($life)
+    {
+        ini_set('session.gc_maxlifetime', $life);
     }
 }
