@@ -27,7 +27,7 @@ class Session extends Core implements session\IFSession {
         $this->config = $config;
         $this->name = isset($this->config['name']) ? $this->config['name'] : '_MR_SID_';
         $this->driver = isset($this->config['driver']) ? $this->config['driver'] : 'File';
-        isset($this->config['life']) ? $this->setSessionLife($this->config['life']) : '';
+        $this->initConfig();
         $this->initSession();
         $this->start();
     }
@@ -84,8 +84,11 @@ class Session extends Core implements session\IFSession {
         }
     }
 
-    private function setSessionLife($life)
-    {
+    private function initConfig() {
+        isset($this->config['life']) && $this->setSessionLife($this->config['life']);
+    }
+
+    private function setSessionLife($life) {
         ini_set('session.gc_maxlifetime', $life);
     }
 }
