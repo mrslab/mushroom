@@ -18,11 +18,11 @@ use \mushroom\core\Core as Core,
 
 class Mysql extends Core {
 
-    var $mysql;
+    protected $mysql;
 
-    var $table;
+    protected $table;
 
-    var $config;
+    protected $config;
 
     public function __construct($config) {
         $this->config = $config;
@@ -71,7 +71,7 @@ class Mysql extends Core {
     }
 
     public function gc($life) {
-        $sql = "DELETE FROM `{$this->table}` WHERE expire + :expire < ".SYS_TIMESTAMP;
+        $sql = "DELETE FROM `{$this->table}` WHERE expire + :expire < ".MR_RT_TIMESTAMP;
         return $this->mysql->prepare($sql)->bindValue(':expire', $life)->execute()->rowCount();
     }
 

@@ -51,7 +51,7 @@ class Mysql extends Core implements IFCache {
         if (
             $data = $this->mysql
                          ->prepare($sql)
-                         ->bindValues(array(':key' => $key, ':now' => SYS_TIMESTAMP))
+                         ->bindValues(array(':key' => $key, ':now' => MR_RT_TIMESTAMP))
                          ->execute()
                          ->fetch()
         ) {
@@ -65,7 +65,7 @@ class Mysql extends Core implements IFCache {
         $data = array(
             'key' => $key,
             'value' => $value,
-            'expire' => SYS_TIMESTAMP + $expire,
+            'expire' => MR_RT_TIMESTAMP + $expire,
         );
         $build = SqlBuild::build()->table($this->table)
                                   ->fields('id')
