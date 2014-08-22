@@ -22,7 +22,7 @@ class Log extends Core
     static public function create($config)
     {
         if ($this->instance === NULL) {
-            $this->instance = new \mushroom\component\log\LoggerFile($config);
+            $this->instance = new log\LoggerFile($config);
         
         }
         return $this->instance;
