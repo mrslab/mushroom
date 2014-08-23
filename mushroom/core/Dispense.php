@@ -22,6 +22,6 @@ class Dispense extends Core {
     }
 
     public function run() {
-        new Application($this->router);
+        Application::run($this->router);
     }
 }

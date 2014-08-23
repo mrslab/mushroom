@@ -15,17 +15,25 @@ namespace mushroom\core;
 
 class Application extends Core {
 
-    public function __construct($router) {
+    private $controller = '';
+
+    private $method = '';
+    
+    public static function run($router) {
+        return new self($router);
+    }
+
+    private function __construct($router) {
         $this->initRouter($router);
         $this->runProcess();
     }
 
-    public function initRouter($router) {
+    private function initRouter($router) {
         $this->controller = $router->mod;
         $this->method = $router->act;
     }
 
-    public function runProcess() {
+    private function runProcess() {
         try {
             $controller = $this->controller.'Controller';
             $appClass = '\\controller\\'.$controller;
@@ -58,4 +66,6 @@ class Application extends Core {
             $e->getExceptionMessage();
         }
     }
+
+    private function __clone() {}
 }
