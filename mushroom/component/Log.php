@@ -17,27 +17,34 @@ use \mushroom\core\Core as Core;
 
 class Log extends Core 
 {
-    protected static $instance = NULL;
+    private $log = null;
 
-    static public function create($config, $type = 'file')
+    private $config = array();
+
+    private function getLogObject()
     {
-        if (self::$instance === NULL) {
-            switch($type) {
-                case 'file':
-                    self::$instance = new log\LoggerFile($config);
-                    break;
-                case 'redis':
-                    self::$instance = new log\LoggerRedis($config);
-                    break;
-            }
-        
+        switch($this->config['driver']) {
+            case 'file':
+                $this->log = new log\LoggerFile($this->config);
+                break;
+            case 'redis':
+                $this->log = new log\LoggerRedis($this->config);
+                break;
         }
-        return self::$instance;
+        
     }
 
-    public function __clone()
+    public function __construct($config)
     {
-        trigger_error('Log class can\'t clone');
+        $this->config = $config;
+        $this->log = $this->getLogObject();
     }
+
+    public function write($type, $message)
+    {
+        $this->log->write($type, $message);
+    
+    }
+
 }
 

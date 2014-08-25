@@ -1,7 +1,7 @@
 <?php
 namespace mushroom\component\log;
 
-abstract class LoggerAbstract implements LoggerInterface
+abstract class LoggerAbstract
 {
 
     const EMERGENCY = 'emergency';
@@ -46,5 +46,8 @@ abstract class LoggerAbstract implements LoggerInterface
         $this->log(self::INFO, $message, $context);
     
     }
+
+    abstract protected function write($message, array $context = array());
+
 }
 
