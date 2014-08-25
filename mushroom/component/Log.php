@@ -17,15 +17,19 @@ use \mushroom\core\Core as Core;
 
 class Log extends Core 
 {
-    protected $instance = NULL;
+    protected static $instance = NULL;
 
-    static public function create($config)
+    static public function create($config, $type = 'file')
     {
-        if ($this->instance === NULL) {
-            $this->instance = new log\LoggerFile($config);
+        if (self::$instance === NULL) {
+            switch($type) {
+                case 'file':
+                    self::$instance = new log\LoggerFile($config);
+                    break;
+            }
         
         }
-        return $this->instance;
+        return self::$instance;
     }
 
     public function __clone()
