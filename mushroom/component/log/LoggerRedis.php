@@ -15,7 +15,7 @@ class LoggerRedis extends LoggerAbstract
     
     }
 
-    public function write($type, $message, array $context = array())
+    protected function write($type, $message, array $context = array())
     {
         $data = "{$type} :  {$message}";
 
