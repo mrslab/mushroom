@@ -26,6 +26,9 @@ class Log extends Core
                 case 'file':
                     self::$instance = new log\LoggerFile($config);
                     break;
+                case 'redis':
+                    self::$instance = new log\LoggerRedis($config);
+                    break;
             }
         
         }
