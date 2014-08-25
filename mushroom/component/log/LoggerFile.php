@@ -16,7 +16,7 @@ class LoggerFile extends LoggerAbstract
     protected function write($type, $message, array $context = array())
     {
         $data = "{$type} :  {$message}";
-        return File::write($this->config['path'], $data);
+        return File::write($this->config['path'], $data, true);
     }
 }
 

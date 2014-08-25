@@ -37,7 +37,7 @@ class Log extends Core
     public function __construct($config)
     {
         $this->config = $config;
-        $this->log = $this->getLogObject();
+        $this->getLogObject();
     }
 
     public function emergency($message)

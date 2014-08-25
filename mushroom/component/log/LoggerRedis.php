@@ -20,7 +20,7 @@ class LoggerRedis extends LoggerAbstract
         $data = "{$type} :  {$message}";
 
         if ($this->stronge === NULL) {
-            $this->stronge = new Redis($this->config['redis']);
+            $this->stronge = new Redis($this->config['connect']);
         }
 
         return $this->stronge->lpush($this->config['key'], $data);

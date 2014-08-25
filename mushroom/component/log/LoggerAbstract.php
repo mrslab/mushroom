@@ -47,7 +47,7 @@ abstract class LoggerAbstract
     
     }
 
-    abstract public function write($type, $message, array $context = array());
+    abstract protected function write($type, $message, array $context = array());
 
 }
 
