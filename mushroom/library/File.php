@@ -40,10 +40,10 @@ class File {
         return $data;
     }
 
-    public static function write($file, $data) {
+    public static function write($file, $data, $file_append = false) {
         try {
-            if (true === self::mkdir($file)) {
-                if (false === file_put_contents($file, $data)) {
+            if (true === self::mkdir(dirname($file))) {
+                if (false === file_put_contents($file, $data, $file_append)) {
                     throw new Exception('file "'.$file.'" write failed');
                 }
             }

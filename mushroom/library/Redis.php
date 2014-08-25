@@ -51,7 +51,7 @@ class Redis extends Core {
             if (!empty($auth)) {
                 $this->redis->auth($auth);
             }
-            if (isset($db)) {
+            if (isset($db) && $db) {
                 $this->redis->select($db);
             }
         } catch (Exception $e) {
