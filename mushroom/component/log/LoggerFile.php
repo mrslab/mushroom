@@ -13,10 +13,10 @@ class LoggerFile extends LoggerAbstract
     
     }
 
-    public function write($type, $message, array $context = array())
+    protected function write($type, $message, array $context = array())
     {
         $data = "{$type} :  {$message}";
-        return File::write($this->config['path'], $data);
+        return File::write($this->config['path'], $data, true);
     }
 }
 

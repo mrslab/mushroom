@@ -43,7 +43,7 @@ class File {
     public static function write($file, $data, $file_append = false) {
         try {
             if (true === self::mkdir(dirname($file))) {
-                if (false === file_put_contents($file, $data, $file_append)) {
+                if (false === file_put_contents($file, $data, $file_append ? FILE_APPEND : 0)) {
                     throw new Exception('file "'.$file.'" write failed');
                 }
             }

@@ -37,12 +37,42 @@ class Log extends Core
     public function __construct($config)
     {
         $this->config = $config;
-        $this->log = $this->getLogObject();
+        $this->getLogObject();
     }
 
-    public function write($type, $message)
+    public function emergency($message)
     {
-        $this->log->write($type, $message);
+        $this->log->emergency($message);
+    
+    }
+
+    public function alert($message)
+    {
+        $this->log->alert($message);
+
+    }
+
+    public function notice($message)
+    {
+        $this->log->notice($message);
+    
+    }
+
+    public function error($message)
+    {
+        $this->log->error($message);
+    
+    }
+
+    public function warning($message) 
+    {
+        $this->log->warning($message);
+    
+    }
+
+    public function info($message)
+    {
+        $this->log->info($message);
     
     }
 
