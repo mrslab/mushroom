@@ -17,7 +17,7 @@ class Dispense extends Core {
     private $router = null;
 
     public function __construct() {
-       $this->router = new Router; 
+       $this->router = new Router;
     }
 
     public function run() {

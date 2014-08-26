@@ -27,4 +27,13 @@ class Common extends Core {
         }
         return true;
     }
+
+    public static function load($class) {
+        $class = "\\mushroom\\core\\".$class;
+        static $loaded = array();
+        if (!isset($loaded[$class])) {
+            $loaded[$class] = new $class;
+        }
+        return $loaded[$class];
+    }
 }

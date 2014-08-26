@@ -15,56 +15,22 @@ namespace mushroom\core;
 class Init extends Core {
 
     public static function bootstrap($config) {
-        self::createCore();
-        self::registerConfig($config);
+        Core::app();
+        Common::load('RegisterConfig')->init($config);
         return new self;
     }
 
     public function run() {
         self::registerInit();
         self::initGlobal();
-        self::dispense()->run();
+        Common::load('Dispense')->run();
     }
 
     public static function registerInit() {
-        self::registerOutput();
-        self::registerComp();
-        self::registerGlobal();
-        self::registerRequest();
-        self::registerHook();
-    }
-
-    public static function createCore() {
-        return Core::app();
-    }
-
-    public static function registerConfig($config)
-    {
-        new RegisterConfig($config);
-    }
-
-    public static function registerComp() {
-        new Component;
-    }
-
-    public static function registerOutput() {
-        new Output;
-    }
-
-    public static function registerGlobal() {
-        new GetGpcs;
-    }
-
-    public static function registerRequest() {
-        new Request;
-    }
-
-    public static function registerHook() {
-        new Hook;   
-    }
-
-    public static function dispense() {
-        return new Dispense;
+        Common::load('Output');
+        Common::load('GetGpcs');
+        Common::load('Request');
+        Common::load('Hook');
     }
 
     public static function initGlobal() {
