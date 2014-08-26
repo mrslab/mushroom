@@ -16,7 +16,7 @@ class RegisterConfig extends Core {
 
     private $config = array();
 
-    public function __construct(array $config) {
+    public function init(array $config) {
         $this->config = $config;
         $this->initConfig();
         $this->register();

@@ -15,10 +15,10 @@ namespace mushroom\core;
 class Output extends Core {
 
     public function __construct() {
-        self::initOutput();
+        $this->initOutput();
     }
 
-    public static function initOutput() {
+    private function initOutput() {
         if(Core::app()->config->gzip && function_exists('ob_gzhandler') && strpos(Core::app()->server->http_accept_encodings, 'gzip') !== false) {
             Core::app()->global->gzip = true;
         }
@@ -35,7 +35,7 @@ class Output extends Core {
         header('Content-Type: text/html; charset='. Core::app()->config->charset);
     }
 
-    public static function echoOut() {
+    public function echoOut() {
         $content = ob_get_contents();
         ob_end_clean();
         Core::app()->global->gzip ? ob_start('ob_gzhandler') : ob_start();

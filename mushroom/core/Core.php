@@ -33,7 +33,7 @@ class Core {
     
     public static function comp() {
         if (self::$__comp__ === null) {
-            self::$__comp__ = new self;
+            self::$__comp__ = Common::load('Component');
         }
         return self::$__comp__;
     }

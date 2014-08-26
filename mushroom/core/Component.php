@@ -14,16 +14,25 @@ namespace mushroom\core;
 
 class Component extends Core {
 
-    public function __construct() {
-        if (isset(Core::app()->config->comp)) {
-            $compCfg = Core::app()->config->comp;
-            if (is_array($compCfg)) {
-            	foreach($compCfg as $key => $val) {
-            		Core::comp()->{$key} = self::register($val['name'], $val['config']);
-            	}
+    private $comps = array();
+
+    public function __get($comp) {
+        try {
+            if (isset($this->comps[$comp])) {
+                return $this->comps[$comp];
             }
+            if (!isset(Core::app()->config->comp[$comp])) {
+                throw new Exception('component config \''.$comp.'\' not exists');
+            }
+            $config = Core::app()->config->comp[$comp];
+            if (!isset($config['name']) || !isset($config['config'])) {
+                throw new Exception('component config \''.$comp.'\' error');
+            }
+            $this->comps[$comp] = self::register($config['name'], $config['config']);
+            return $this->comps[$comp];
+        } catch ( Exception $e ) {
+            $e->getMessage();
         }
-        Core::comp()->__strictAttr(true);
     }
 
     public static function register($name, $config = array()) {
