@@ -27,6 +27,16 @@ class Verify {
         return preg_match("/^[0-9]+$/i", $number) ? true: false;
     }
 
+    public static function isInteger($number) {
+        return preg_match("/^(?:[-]?[1-9][0-9]*|0)$/i", $number) ? true: false;
+    
+    }
+
+    public static function isHex($number) {
+        return preg_match("/^0x[0-9a-fA-F]+$/i", $number) ? true : false; 
+    
+    }
+
     public static function isAlpha($letter) {
         return preg_match("/^[a-zA-Z]+$/", $letter) ? true: false;
     }
