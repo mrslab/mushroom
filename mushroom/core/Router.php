@@ -83,7 +83,6 @@ class Router extends Core {
     private function getCliArgs() {
         $this->mod = Core::app()->args->m;
         $this->act = Core::app()->args->a;
-        print_r(Core::app()->args);
     }
 
     private function getQueryStringController($mod) {
