@@ -37,7 +37,7 @@ class Component extends Core {
 
     public static function register($name, $config = array()) {
         try {
-            $compClass = '\\mushroom\\component\\'. ucfirst($name);
+            $compClass = '\\mushroom\\component\\'.$name.'\\'. ucfirst($name);
             if (!class_exists($compClass)) {
             	throw new Exception('Component error:\''.$compClass.'\' class does not exist');
             }
