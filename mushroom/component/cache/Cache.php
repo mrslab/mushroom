@@ -10,7 +10,7 @@
  * @link      https://github.com/mrslab/mushroom
  */
 
-namespace mushroom\component;
+namespace mushroom\component\cache;
 
 use \mushroom\core\Core as Core;
 

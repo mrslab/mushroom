@@ -10,7 +10,7 @@
  * @link      https://github.com/mrslab/mushroom
  */
 
-namespace mushroom\component;
+namespace mushroom\component\memcache;
 
 use \mushroom\core\Core as Core,
     \mushroom\library\Memcached as MrMemcached,
