@@ -10,17 +10,21 @@
  * @link      https://github.com/mrslab/mushroom
  */
 
-define('MR_VERSION', '1.0');
-define('MR_RELEASE', '20140602');
+const MR_VERSION = '1.0';
+const MR_RELEASE = '20140602';
+
+const MR_E_ERROR   = 1;
+const MR_E_WARNING = 2;
+const MR_E_NOTICE  = 4;
+const MR_E_ALL     = 8;
+
+const MR_MODE_QUERY   = 1;
+const MR_MODE_SEGMENT = 2;
+const MR_MODE_CLI     = 99;
 
 if (!defined('MR_APP_PATH')) {
     define('MR_APP_PATH', dirname(MR_ROOT_PATH));
 }
-
-define('MR_E_ERROR'  , 1);
-define('MR_E_WARNING', 2);
-define('MR_E_NOTICE' , 4);
-define('MR_E_ALL'    , 8);
 
 !defined('MR_CONF_PATH')       && define('MR_CONF_PATH',       MR_APP_PATH . '/config');
 !defined('MR_RUNTIME_PATH')    && define('MR_RUNTIME_PATH',    MR_APP_PATH . '/runtime');
@@ -33,6 +37,7 @@ define('MR_E_ALL'    , 8);
 define('MR_RT_TIMESTAMP', time());
 define('MR_RT_BMEMORY',   memory_get_usage());
 define('MR_RT_DS',        DIRECTORY_SEPARATOR);
+define('MR_RT_CLI',       PHP_SAPI == 'cli' ? true : false);
 
 list($microtime, $second) = explode(' ', microtime());
 define('MR_RT_BTIME', $second + $microtime);

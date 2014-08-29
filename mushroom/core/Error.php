@@ -47,29 +47,61 @@ class Error {
                 ob_end_clean();
             }
             $trace = self::getTraces();
-            $traceStr = $dot = '';
-            $numline = 0;
-            foreach($trace as $k => $v) {
-                $vdot = $dot.'#'.($numline++).str_repeat("&nbsp;", 3 - count($numline));
-                $vfile = isset($v['file']) ? $v['file']: '';
-                $vline = isset($v['line']) ? '('.$v['line'].')': '';
-                $vclass = isset($v['class']) ? $v['class'] : '';
-                $vtype = isset($v['type']) ? $v['type'] : '';
-                $vfunc = isset($v['function']) ? $v['function'] : '';
-                $vargs = !empty($v['args']) ? '('.json_encode($v['args']).' )' : '()';
-
-                $traceStr .= $vdot.$vfile.$vline.': '.$vclass.$vtype.$vfunc.$vargs;
-                $dot = '<br/>';
+            if (MR_RT_CLI) {
+                self::showCliMessage($errTit, $errStr, $errfile, $errline, $trace);
+            } else {
+                self::showHtmlMessage($errTit, $errStr, $errfile, $errline, $trace);
             }
-            $outLine = "{$errfile}&#12288;(Line {$errline})";
-            echo self::errorTpl($errTit, $errStr, $outLine, $traceStr);
-            exit(1);
+
         } elseif ($error == MR_E_ERROR) {
             if (!headers_sent()) {
                 header('HTTP/1.1 404 Not Found');
             }
-            exit(1);
         }
+        exit(1);
+    }
+
+    private static function showHtmlMessage($errTit, $errStr, $errfile, $errline, $trace) {
+        $traceStr = $dot = '';
+        $numline = 0;
+        foreach($trace as $k => $v) {
+            $vdot = $dot.'#'.($numline++).str_repeat("&nbsp;", 3 - count($numline));
+            $vfile = isset($v['file']) ? $v['file']: '';
+            $vline = isset($v['line']) ? '('.$v['line'].')': '';
+            $vclass = isset($v['class']) ? $v['class'] : '';
+            $vtype = isset($v['type']) ? $v['type'] : '';
+            $vfunc = isset($v['function']) ? $v['function'] : '';
+            $vargs = !empty($v['args']) ? '('.json_encode($v['args']).' )' : '()';
+
+            $traceStr .= $vdot.$vfile.$vline.': '.$vclass.$vtype.$vfunc.$vargs;
+            $dot = '<br/>';
+        }
+        $outLine = "{$errfile}&#12288;(Line {$errline})";
+        echo self::errorTpl($errTit, $errStr, $outLine, $traceStr);
+    }
+
+    private static function showCliMessage($errTit, $errStr, $errfile, $errline, $trace) {
+        $traceStr = $dot = '';
+        $numline = 0;
+        foreach($trace as $k => $v) {
+            $vdot = $dot.'# '.($numline++);
+            $vfile = isset($v['file']) ? $v['file']: '';
+            $vline = isset($v['line']) ? '('.$v['line'].')': '';
+            $vclass = isset($v['class']) ? $v['class'] : '';
+            $vtype = isset($v['type']) ? $v['type'] : '';
+            $vfunc = isset($v['function']) ? $v['function'] : '';
+            $vargs = !empty($v['args']) ? '('.json_encode($v['args']).' )' : '()';
+
+            $traceStr .= $vdot.$vfile.$vline.': '.$vclass.$vtype.$vfunc.$vargs;
+            $dot = "\n";
+        }
+        $output = array(
+            "[{$errTit}] [".date(\DATE_ATOM, MR_RT_TIMESTAMP)."] \"{$errStr}\" IN {$errfile} ($errline)",
+            "Code Backtrace:",
+            $traceStr,
+        );
+        $output = implode("\n", $output)."\n";
+        echo $output;
     }
 
     public static function kerShutdown() {

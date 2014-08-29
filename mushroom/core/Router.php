@@ -25,11 +25,14 @@ class Router extends Core {
     public function getRouter() {
         try {
             switch ($this->getMode()) {
-                case '1':
+                case MR_MODE_QUERY:
                     $this->getQueryString();
                     break;
-                case '2':
+                case MR_MODE_SEGMENT:
                     $this->getQuerySegment();
+                    break;
+                case MR_MODE_CLI:
+                    $this->getCliArgs();
                     break;
                 default:
                     throw new Exception('URL route mode error');
@@ -53,7 +56,7 @@ class Router extends Core {
     }
 
     public function getMode() {
-        return Core::app()->config->mode;
+        return MR_RT_CLI ? MR_MODE_CLI: Core::app()->config->mode;
     }
 
     public function getQueryString() {
@@ -75,6 +78,12 @@ class Router extends Core {
             $paramKey++;
         }
         Core::app()->get->__readonlyAttr(true);
+    }
+
+    private function getCliArgs() {
+        $this->mod = Core::app()->args->m;
+        $this->act = Core::app()->args->a;
+        print_r(Core::app()->args);
     }
 
     private function getQueryStringController($mod) {
