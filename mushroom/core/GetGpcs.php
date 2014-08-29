@@ -17,7 +17,6 @@ class GetGpcs extends Core {
     public function __construct() {
         $this->regGet();
         $this->regPost();
-        $this->regCookie();
         $this->regServer();
     }
 
@@ -45,17 +44,6 @@ class GetGpcs extends Core {
         Core::app()->post = $post;
     }
 
-    private function regCookie() {
-        $cookie = new Core;
-        if (isset($_COOKIE)) {
-            foreach ($_COOKIE as $key => $val) {
-                $cookie->{$key} = $val;
-            }
-        }
-        unset($_COOKIE);
-        Core::app()->cookie = $cookie;
-    }
-
     private function regServer() {
         $server = new Core;
         if (isset($_SERVER)) {
@@ -68,5 +56,4 @@ class GetGpcs extends Core {
         $server->__readonlyAttr(true);
         Core::app()->server = $server;
     }
-
 }
