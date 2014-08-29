@@ -18,6 +18,7 @@ class GetGpcs extends Core {
         $this->regGet();
         $this->regPost();
         $this->regServer();
+        $this->regCliArgs();
     }
 
     private function regGet() {
@@ -55,5 +56,27 @@ class GetGpcs extends Core {
         unset($_SERVER);
         $server->__readonlyAttr(true);
         Core::app()->server = $server;
+    }
+
+    private function regCliArgs() {
+        $args = new Core;
+        if (MR_RT_CLI) {
+            global $argv;
+            $len = count($argv);
+            for($i = 1; $i < $len; $i+=2) {
+                $key = isset($argv[$i]) ? $argv[$i]: '';
+                if (
+                    empty($key) || 
+                    substr($key, 0, 1) != '-' ||
+                    (substr($key, 0, 2) == '--' && strlen($key) < 4) ||
+                    (substr($key, 0, 1) == '-' && strlen($key) != 2)
+                ) {
+                    throw new Exception($argv[0].': invalid option: "'.$key.'"');
+                }
+                $key = trim($key, '-');
+                $args->{$key} = isset($argv[$i+1]) ? $argv[$i+1]: '';
+            }
+        }
+        Core::app()->args = $args;
     }
 }

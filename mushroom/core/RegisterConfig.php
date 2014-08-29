@@ -57,7 +57,7 @@ class RegisterConfig extends Core {
         $base->timezone = isset($cfg['timezone']) && !empty($cfg['timezone']) ? $cfg['timezone'] : 8;
         $base->charset = isset($cfg['charset']) && !empty($cfg['charset']) ? $cfg['charset'] : 'utf-8';
         $base->gzip = isset($cfg['gzip']) && !empty($cfg['gzip'])? $cfg['gzip'] : false;
-        $base->mode = isset($cfg['mode']) && !empty($cfg['mode']) ? $cfg['mode'] : 1;
+        $base->mode = isset($cfg['mode']) && !empty($cfg['mode']) ? $cfg['mode'] : MR_MODE_QUERY;
         $base->controller = isset($cfg['controller']) && !empty($cfg['controller']) ? $cfg['controller'] : 'index';
         $base->method = isset($cfg['method']) && !empty($cfg['method']) ? $cfg['method'] : 'index';
         $base->theme = isset($cfg['theme']) ? $cfg['theme'] : 'default';

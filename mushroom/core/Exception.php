@@ -30,25 +30,42 @@ class Exception extends \Exception{
             if (!headers_sent()) {
                 header('HTTP/1.1 500 Internal Server Error');
             }
-            $outLine = "{$file}&#12288;(Line {$line})";
-            $trace = str_replace("\r", "", $trace);
-            $trace = explode("\n", $trace);
-            array_filter($trace);
-            $traceStr = $dot = '';
-            foreach($trace as $tval) {
-                $ftrace = explode(' ', $tval);
-                $fftrace = array_shift($ftrace);
-                $traceStr .= $dot . $fftrace. str_repeat("&nbsp;", 4 - strlen($fftrace)) . implode("", $ftrace);
-                $dot = '<br/>';
+            if (MR_RT_CLI) {
+                self::showCliMessage($msg, $file, $line, $trace);
+            } else {
+                self::showHtmlMessage($msg, $file, $line, $trace);
             }
-            echo self::errorTpl($msg, $outLine, $traceStr);
-            exit(1);
         } else {
             if (!headers_sent()) {
                 header('HTTP/1.1 404 Not Found');
             }
-            exit(1);
         }
+        exit(1);
+    }
+
+    private static function showHtmlMessage($msg, $file, $line, $trace) {
+        $outLine = "{$file}&#12288;(Line {$line})";
+        $trace = str_replace("\r", "", $trace);
+        $trace = explode("\n", $trace);
+        array_filter($trace);
+        $traceStr = $dot = '';
+        foreach($trace as $tval) {
+            $ftrace = explode(' ', $tval);
+            $fftrace = array_shift($ftrace);
+            $traceStr .= $dot . $fftrace. str_repeat("&nbsp;", 4 - strlen($fftrace)) . implode("", $ftrace);
+            $dot = '<br/>';
+        }
+        echo self::errorTpl($msg, $outLine, $traceStr);
+    }
+
+    private static function showCliMessage($msg, $file, $line, $trace) {
+        $output = array(
+            "[Exception] [".date(\DATE_ATOM, MR_RT_TIMESTAMP)."] \"{$msg}\" IN {$file} ($line)",
+            "Code Backtrace:",
+            $trace,
+        );
+        $output = implode("\n", $output)."\n";
+        echo $output;
     }
 
     private static function errorTpl($msg, $file, $trace) {
