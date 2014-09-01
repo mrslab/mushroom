@@ -12,15 +12,14 @@
 
 namespace mushroom\component\cache;
 
-use \mushroom\core\Core as Core,
-    \mushroom\core\Component as Component;
+use \mushroom\core\Component as Component;
 
-class Memcache extends Core implements IFCache {
+class Memcache implements IFCache {
 
     var $memcache;
 
     public function __construct($config) {
-        $this->memcache = Component::register('Memcache', $config);
+        $this->memcache = Component::register('memcache', $config);
     }
 
     public function get($key) {

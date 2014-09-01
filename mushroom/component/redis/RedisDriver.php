@@ -10,7 +10,7 @@
  * @link      https://github.com/mrslab/mushroom
  */
 
-namespace mushroom\library;
+namespace mushroom\component\redis;
 
 use \mushroom\core\Exception as Exception;
 

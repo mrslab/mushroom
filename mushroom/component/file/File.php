@@ -10,13 +10,13 @@
  * @link      https://github.com/mrslab/mushroom
  */
 
-namespace mushroom\library;
+namespace mushroom\component\file;
 
 use \mushroom\core\Exception as Exception;
 
 class File {
 
-    public static function mkdir($path) {
+    public function mkdir($path) {
         try {
             $dir = $path;
             if(!is_dir($dir)) {
@@ -30,7 +30,7 @@ class File {
         }
     }
 
-    public static function read($file) {
+    public function read($file) {
         if (is_file($file)) {
             $data = file_get_contents($file);
         } else {
@@ -39,9 +39,9 @@ class File {
         return $data;
     }
 
-    public static function write($file, $data, $file_append = false) {
+    public function write($file, $data, $file_append = false) {
         try {
-            if (true === self::mkdir(dirname($file))) {
+            if (true === $this->mkdir(dirname($file))) {
                 if (false === file_put_contents($file, $data, $file_append ? FILE_APPEND : 0)) {
                     throw new Exception('file "'.$file.'" write failed');
                 }
@@ -52,7 +52,7 @@ class File {
         }
     }
 
-    public static function delete($file) {
+    public function delete($file) {
         try {
             if (!is_file($file)) {
                 return false;

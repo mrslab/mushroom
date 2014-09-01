@@ -12,22 +12,24 @@
 
 namespace mushroom\component\log;
 
-use \mushroom\library\File;
+use \mushroom\core\Component as Component;
 
 class LoggerFile extends LoggerAbstract
 {
-    protected $config;
+    private $config;
+
+    private $file = null;
 
     public function __construct($config)
     {
         $this->config = $config;
-    
+        $this->file = Component::register('file');
     }
 
     protected function write($type, $message, array $context = array())
     {
         $data = "{$type} :  {$message}";
-        return File::write($this->config['path'], $data, true);
+        return $this->file->write($this->config['path'], $data, true);
     }
 }
 

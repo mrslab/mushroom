@@ -10,7 +10,7 @@
  * @link      https://github.com/mrslab/mushroom
  */
 
-namespace mushroom\library;
+namespace mushroom\component\upload;
 
 class Upload {
 
@@ -25,14 +25,10 @@ class Upload {
     protected $fileTemp;
 
     protected $errorCode = 0;
-    
-    public function __construct($fileKey = 'fileData') {
+
+    public function init($fileKey = 'fileData') {
         $this->fileKey = $fileKey;
         $this->initFileInfo();
-    }
-
-    public static function getInstance($fileKey) {
-        return new self($fileKey);
     }
 
     public function initFileInfo() {

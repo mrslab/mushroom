@@ -12,9 +12,7 @@
 
 namespace mushroom\component\mongo;
 
-use \mushroom\core\Core as Core;
-
-class Command extends Core {
+class Command {
 
     private $db = null;
 

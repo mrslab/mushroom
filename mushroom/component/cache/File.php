@@ -12,20 +12,22 @@
 
 namespace mushroom\component\cache;
 
-use \mushroom\core\Core as Core,
-    \mushroom\library\File as MrFile;
+use \mushroom\core\Component as Component;
 
-class File extends Core implements IFCache {
+class File implements IFCache {
 
-    var $path;
+    private $path;
+
+    private $file = null;
 
     public function __construct($config) {
         $this->path = isset($config['path']) && !empty($config['path']) ? $config['path'] : MR_RUNTIME_PATH . '/cache';
+        $this->file = Component::register('file');
     }
 
     public function get($key) {
         $file = $this->makeFile($key);
-        if (false !== ($data = MrFile::read($file))) {
+        if (false !== ($data = $this->file->read($file))) {
             $data = str_replace("<?exit('Denied!')?>",'', $data);
             preg_match('/^(\d+)mushroom\/\/\-\-\>/is', $data, $match);
             $life = isset($match[1]) ? $match[1] : 0 ;
@@ -44,12 +46,12 @@ class File extends Core implements IFCache {
         $file = $this->makeFile($key);
         $life = $expire == 0 ? 0 : $expire + MR_RT_TIMESTAMP;
         $data = "<?exit('Denied!')?>" . $life . 'mushroom//-->' . $value;
-        return MrFile::write($file, $data);
+        return $this->file->write($file, $data);
     }
 
     public function delete($key) {
         $file = $this->makeFile($key);
-        return MrFile::delete($file);
+        return $this->file->delete($file);
     }
 
     private function makeFile($key) {

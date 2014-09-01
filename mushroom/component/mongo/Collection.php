@@ -12,9 +12,7 @@
 
 namespace mushroom\component\mongo;
 
-use \mushroom\core\Core as Core;
-
-class Collection extends Core {
+class Collection {
 
     private $collection = null;
 

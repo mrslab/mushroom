@@ -12,9 +12,7 @@
 
 namespace mushroom\component\mysql;
 
-use \mushroom\core\Core as Core;
-
-class Mysql extends mysql\Connect {
+class Mysql extends Connect {
 	
     public function __construct($cfg) {
         $config = array(

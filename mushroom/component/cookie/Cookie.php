@@ -14,7 +14,7 @@ namespace mushroom\component\cookie;
 
 use \mushroom\core\Core as Core;
 
-class Cookie extends Core {
+class Cookie {
 
     var $path;
 

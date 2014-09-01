@@ -12,9 +12,7 @@
 
 namespace mushroom\component\mongo;
 
-use \mushroom\core\Core as Core;
-
-class Mongo extends mongo\Connect {
+class Mongo extends Connect {
 	
     public function __construct($cfg) {
         $server = isset($cfg['server']) ? $cfg['server']: '';

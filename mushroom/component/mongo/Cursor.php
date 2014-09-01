@@ -12,10 +12,9 @@
 
 namespace mushroom\component\mongo;
 
-use \mushroom\core\Core as Core,
-    \mushroom\core\Exception as Exception;
+use \mushroom\core\Exception as Exception;
 
-class Cursor extends Core {
+class Cursor {
 
     private $cursor = null;
 

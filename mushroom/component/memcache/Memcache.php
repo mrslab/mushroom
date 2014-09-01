@@ -12,9 +12,7 @@
 
 namespace mushroom\component\memcache;
 
-use \mushroom\core\Core as Core;
-
-class Memcache extends Core {
+class Memcache {
 
 	private $memcache = null;
 

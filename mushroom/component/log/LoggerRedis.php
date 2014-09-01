@@ -12,18 +12,17 @@
 
 namespace mushroom\component\log;
 
-use \mushroom\library\Redis;
+use \mushroom\core\Component as Component;
 
 class LoggerRedis extends LoggerAbstract
 {
-    protected $config;
+    private $config;
 
-    protected $stronge = NULL;
+    private $stronge = NULL;
 
     public function __construct($config)
     {
         $this->config = $config;
-    
     }
 
     protected function write($type, $message, array $context = array())
@@ -31,7 +30,7 @@ class LoggerRedis extends LoggerAbstract
         $data = "{$type} :  {$message}";
 
         if ($this->stronge === NULL) {
-            $this->stronge = new Redis($this->config['connect']);
+            $this->stronge = Component::register('redis', $this->config['connect']);
         }
 
         return $this->stronge->lpush($this->config['key'], $data);
