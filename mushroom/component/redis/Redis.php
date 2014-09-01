@@ -12,10 +12,7 @@
 
 namespace mushroom\component\redis;
 
-use \mushroom\core\Core as Core,
-    \mushroom\library\Redis as MrRedis;
-
-class Redis extends MrRedis {
+class Redis extends RedisDriver {
 
     public function __construct($config) {
         parent::__construct($config);
