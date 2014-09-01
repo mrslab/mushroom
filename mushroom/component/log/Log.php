@@ -22,10 +22,10 @@ class Log
     {
         switch($this->config['driver']) {
             case 'file':
-                $this->log = new log\LoggerFile($this->config);
+                $this->log = new LoggerFile($this->config);
                 break;
             case 'redis':
-                $this->log = new log\LoggerRedis($this->config);
+                $this->log = new LoggerRedis($this->config);
                 break;
         }
         

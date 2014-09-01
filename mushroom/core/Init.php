@@ -31,6 +31,8 @@ class Init extends Core {
         Common::load('GetGpcs');
         Common::load('Request');
         Common::load('Hook');
+        Common::load('Session');
+        Common::load('Cookie');
     }
 
     public static function initGlobal() {

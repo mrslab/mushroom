@@ -14,11 +14,21 @@ namespace mushroom\core;
 
 class Session extends Core {
 
+    private $config = array();
+
     public function __construct() {
-        
+        $this->config = Core::app()->config->session;
+        $this->regSession();
+    }
+
+    private function regSession() {
+        Core::app()->session = new Core;
+        if ($this->checkSession()) {
+            Core::app()->session = Component::register('session', $this->config);
+        }
     }
 
     private function checkSession() {
-        if(empty(Core::app()->))
+        return !empty($this->config) && !MR_RT_CLI;
     }
 }

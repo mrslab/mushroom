@@ -29,7 +29,7 @@ class Mysql {
     }
 
     public function open($path, $name) {
-        $this->mysql = Component::register('Mysql', $this->config);
+        $this->mysql = Component::register('mysql', $this->config);
     }
 
     public function read($sid) {

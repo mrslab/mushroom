@@ -14,4 +14,21 @@ namespace mushroom\core;
 
 class Cookie extends Core {
 
+    private $config = array();
+
+    public function __construct() {
+        $this->config = Core::app()->config->cookie;
+        $this->regCookie();
+    }
+
+    private function regCookie() {
+        Core::app()->cookie = new Core;
+        if ($this->checkCookie()) {
+            Core::app()->cookie = Component::register('cookie', $this->config);
+        }
+    }
+
+    private function checkCookie() {
+        return !MR_RT_CLI;
+    }
 }
