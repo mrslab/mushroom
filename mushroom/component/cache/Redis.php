@@ -12,15 +12,14 @@
 
 namespace mushroom\component\cache;
 
-use \mushroom\core\Core as Core,
-    \mushroom\core\Component as Component;
+use \mushroom\core\Component as Component;
 
-class Redis extends Core implements IFCache {
+class Redis implements IFCache {
 
-    var $redis;
+    var $redis = null;
 
     public function __construct($config) {
-        $this->redis = Component::register('Redis', $config);
+        $this->redis = Component::register('redis', $config);
     }
 
     public function get($key) {

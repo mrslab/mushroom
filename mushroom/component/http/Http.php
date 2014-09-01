@@ -10,11 +10,11 @@
  * @link      https://github.com/mrslab/mushroom
  */
 
-namespace mushroom\library;
+namespace mushroom\component\http;
 
 class Http {
 
-    public static function curlGet($url, $referer = '', $timeout = 3) {
+    public function get($url, $referer = '', $timeout = 3) {
         $ch = curl_init();
         curl_setopt ($ch,CURLOPT_REFERER, $referer);
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -26,9 +26,5 @@ class Http {
         $result = curl_exec($ch);
         curl_close($ch);
         return $result;
-    }
-
-    public static function curlPost() {
-        
     }
 }

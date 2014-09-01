@@ -12,10 +12,9 @@
 
 namespace mushroom\component\session;
 
-use \mushroom\core\Core as Core,
-    \mushroom\core\Component as Component;
+use \mushroom\core\Component as Component;
 
-class Mysql extends Core {
+class Mysql {
 
     protected $mysql;
 

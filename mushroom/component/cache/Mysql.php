@@ -35,7 +35,7 @@ class Mysql extends Core implements IFCache {
     var $table;
 
     public function __construct($config) {
-        $this->mysql = Component::register('Mysql', $config);
+        $this->mysql = Component::register('mysql', $config);
         $pre = isset($config['tablepre']) ? $config['tablepre']: ''; 
         $this->table = $pre.isset($config['table']) && !empty($config['table']) ? $config['table'] : 'cache'; 
     }

@@ -12,20 +12,22 @@
 
 namespace mushroom\component\session;
 
-use \mushroom\core\Core as Core,
-    \mushroom\library\File as MrFile;
+use \mushroom\core\Component as Component;
 
-class File extends Core {
+class File {
 
-    var $path;
+    private $path;
+
+    private $file = null;
 
     public function __construct($config) {
         $this->path = isset($config['path']) ? $config['path']: MR_RUNTIME_PATH .'/session';
+        $this->file = Component::register('file');
         $this->init();
     }
 
     public function init() {
-        MrFile::mkdir($this->path);
+        $this->file->mkdir($this->path);
         session_save_path($this->path);
     }
 }

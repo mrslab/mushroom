@@ -12,10 +12,9 @@
 
 namespace mushroom\component\session;
 
-use \mushroom\core\Core as Core,
-    \mushroom\core\Component as Component;
+use \mushroom\core\Component as Component;
 
-class Memcache extends Core {
+class Memcache {
 
     var $memcache;
 

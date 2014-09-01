@@ -12,9 +12,7 @@
 
 namespace mushroom\component\session;
 
-use \mushroom\core\Core as Core;
-
-class Session extends Core implements session\IFSession {
+class Session implements session\IFSession {
 
     protected $config;
 

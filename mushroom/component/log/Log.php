@@ -12,9 +12,7 @@
 
 namespace mushroom\component\log; 
 
-use \mushroom\core\Core as Core;
-
-class Log extends Core 
+class Log 
 {
     private $log = null;
 

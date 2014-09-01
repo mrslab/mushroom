@@ -12,10 +12,9 @@
 
 namespace mushroom\component\mysql;
 
-use \mushroom\core\Core as Core,
-    \mushroom\core\Exception as Exception;
+use \mushroom\core\Exception as Exception;
 
-class Translation extends Core {
+class Translation {
 
     private $connect = null;
 

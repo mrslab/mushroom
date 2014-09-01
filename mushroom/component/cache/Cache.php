@@ -12,9 +12,7 @@
 
 namespace mushroom\component\cache;
 
-use \mushroom\core\Core as Core;
-
-class Cache extends Core{
+class Cache {
 	
 	private $cache = null;
 	

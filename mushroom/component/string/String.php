@@ -10,11 +10,11 @@
  * @link      https://github.com/mrslab/mushroom
  */
 
-namespace mushroom\library;
+namespace mushroom\component\string;
 
 class String {
 
-    public static function uuid() {
+    public  function uuid() {
         $str = md5(uniqid(mt_rand(), true));   
         $uuid  = substr($str,0,8) . '-';   
         $uuid .= substr($str,8,4) . '-';   
@@ -24,7 +24,7 @@ class String {
         return $uuid;
     }
 
-    public static function msubstr($str, $start = 0, $length, $charset = "utf-8", $suffix = true) {
+    public function msubstr($str, $start = 0, $length, $charset = "utf-8", $suffix = true) {
         if(function_exists("mb_substr"))
             $slice = mb_substr($str, $start, $length, $charset);
         elseif(function_exists('iconv_substr')) {
@@ -40,7 +40,7 @@ class String {
          return $suffix ? $slice.'...' : $slice;
     }
 
-    public static function convertCharset($string, $from = 'gbk', $to = 'utf-8') {
+    public function convertCharset($string, $from = 'gbk', $to = 'utf-8') {
         $from = strtoupper($from) == 'UTF8' ? 'utf-8' : $from;
         $to = strtoupper($to) == 'UTF8' ? 'utf-8' : $to;
         if (strtoupper($from) === strtoupper($to) || empty($string) || (is_scalar($string) && !is_string($string))) {
@@ -56,8 +56,8 @@ class String {
             }
         } elseif (is_array($string)) {
             foreach ($string as $key => $val) {
-                $_key = self::convertCharset($key, $from, $to);
-                $string[$_key] = self::convertCharset($val, $from, $to);
+                $_key = $this->convertCharset($key, $from, $to);
+                $string[$_key] = $this->convertCharset($val, $from, $to);
                 if ($key != $_key) {
                     unset($string[$key]);
                 }
@@ -69,16 +69,16 @@ class String {
         }
     }
 
-    public static function filterString($string) {
+    public function filterString($string) {
         $strSearch = array('%20','%27','%2527','*','"' ,"'",';','<' ,'>' ,'{','}','\\');
         $strReplace = array('' ,'' ,'' ,'' ,'&quot;','' ,'' ,'&lt;','&gt;','' ,'' ,'');
         return str_replace($strSearch, $strReplace, $string);
     }
 
-    public static function dHtmlspecialChars($string) {
+    public function dHtmlspecialChars($string) {
         if(is_array($string)) {
             foreach($string as $key => $val) {
-                $string[$key] = self::dHtmlspecialChars($val);
+                $string[$key] = $this->dHtmlspecialChars($val);
             }
         } else {
             $string = str_replace(array('&', '"', '\'', '<', '>'), array('&amp;', '&quot;', '&#039;', '&lt;', '&gt;'), $string);
@@ -89,7 +89,7 @@ class String {
         return $string;
     }
 
-    public static function strUrlCode($string, $mode = 'encode') {
+    public function strUrlCode($string, $mode = 'encode') {
         if($mode == 'encode') {
             $bstr = base64_encode($string);
             $bstr = str_replace(array('+', '/'), array('!', '*'), $bstr);
@@ -100,7 +100,7 @@ class String {
         return $bstr;
     }
 
-    public static function lcFirst($string) {
+    public function lcFirst($string) {
         $string[0] = strtolower($string[0]);
         return (string) $string;
     }
