@@ -36,8 +36,12 @@ class Cookie {
         return setcookie($key, $val, $expire , $this->path, $this->domain, $this->secure, $this->httponly);
     }
 
-    public function get($key) {
-        return Core::app()->cookie->{$key};
+    public function get($key = null) {
+        if (null === $key) {
+            return $_COOKIE;
+        } else {
+            return isset($_COOKIE[$key]) ? $_COOKIE[$key]: '';
+        }
     }
 
     public function delete($key) {

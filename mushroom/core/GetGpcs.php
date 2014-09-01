@@ -17,8 +17,8 @@ class GetGpcs extends Core {
     public function __construct() {
         $this->regGet();
         $this->regPost();
-        $this->regServer();
         $this->regCliArgs();
+        $this->regServer();
     }
 
     private function regGet() {

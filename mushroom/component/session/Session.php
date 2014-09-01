@@ -12,7 +12,7 @@
 
 namespace mushroom\component\session;
 
-class Session implements session\IFSession {
+class Session implements IFSession {
 
     protected $config;
 
@@ -68,15 +68,15 @@ class Session implements session\IFSession {
     private function initSession() {
         switch($this->driver) {
             case 'Mysql':
-                $session = new session\Mysql($this->config);
+                $session = new Mysql($this->config);
                 $this->bindSession($session);
                 break;
             case 'Memcache':
-                $session = new session\Memcache($this->config['connect']);
+                $session = new Memcache($this->config['connect']);
                 $this->bindSession($session);
                 break;
             case 'File':
-                new session\File($this->config);
+                new File($this->config);
                 break;
         }
     }

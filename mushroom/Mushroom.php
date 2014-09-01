@@ -10,12 +10,4 @@
  * @link      https://github.com/mrslab/mushroom
  */
 
-namespace mr;
-
-class Core extends \mushroom\core\Core { }
-
-class Controller extends \mushroom\core\Controller { }
-
-class Model extends \mushroom\core\Model { }
-
-abstract class ActiveRecord extends \mushroom\core\ActiveRecord { }
+require './boot/Bootstrap.php';

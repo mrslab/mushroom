@@ -16,5 +16,5 @@ class Redis extends RedisDriver {
 
     public function __construct($config) {
         parent::__construct($config);
-	}
+    }
 }

@@ -27,7 +27,7 @@ class Memcache {
     }
 
     public function open($path, $name) {
-        $this->memcache = Component::register('Memcache', $this->config);
+        $this->memcache = Component::register('memcache', $this->config);
     }
 
     public function read($sid) {
