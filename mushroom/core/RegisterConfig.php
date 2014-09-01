@@ -52,6 +52,14 @@ class RegisterConfig extends Core {
         Core::app()->config->hook = $cfg;
     }
 
+    public function regSession($cfg) {
+        Core::app()->config->session = $cfg;
+    }
+
+    public function regCookie($cfg) {
+        Core::app()->config->cookie = $cfg;
+    }
+
     public function regBase($cfg) {
         $base = Core::app()->config;
         $base->timezone = isset($cfg['timezone']) && !empty($cfg['timezone']) ? $cfg['timezone'] : 8;
