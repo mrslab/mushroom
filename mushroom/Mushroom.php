@@ -10,11 +10,4 @@
  * @link      https://github.com/mrslab/mushroom
  */
 
-namespace mushroom\component\redis;
-
-class Redis extends RedisDriver {
-
-    public function __construct($config) {
-        parent::__construct($config);
-    }
-}
+require './boot/Bootstrap.php';

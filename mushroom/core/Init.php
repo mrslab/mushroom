@@ -41,6 +41,6 @@ class Init extends Core {
     }
 
     public function __destruct() {
-        new Debug();
+        Common::load('Debug');
     }
 }
