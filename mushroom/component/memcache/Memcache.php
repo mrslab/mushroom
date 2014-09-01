@@ -19,7 +19,7 @@ class Memcache extends Core {
 	private $memcache = null;
 
 	public function __construct($config) {
-		$this->memcache = extension_loaded('memcached') ? new MrMemcached($config) : new MrMemcache($config);
+		$this->memcache = extension_loaded('memcached') ? new MemcachedDriver($config) : new MemcacheDriver($config);
 	}
 
 	public function get($key) {

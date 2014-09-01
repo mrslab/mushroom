@@ -14,7 +14,7 @@ namespace mushroom\component\memcache;
 
 use \mushroom\core\Exception as Exception;
 
-class MrMemcache {
+class MemcacheDriver {
 
     protected $memcache;
 
