@@ -12,9 +12,7 @@
 
 namespace mushroom\component\memcache;
 
-use \mushroom\core\Core as Core,
-    \mushroom\library\Memcached as MrMemcached,
-    \mushroom\library\Memcache as MrMemcache;
+use \mushroom\core\Core as Core;
 
 class Memcache extends Core {
 

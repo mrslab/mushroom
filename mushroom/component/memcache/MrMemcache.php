@@ -10,24 +10,23 @@
  * @link      https://github.com/mrslab/mushroom
  */
 
-namespace mushroom\library;
+namespace mushroom\component\memcache;
 
-use \mushroom\core\Core as Core,
-    \mushroom\core\Exception as Exception;
+use \mushroom\core\Exception as Exception;
 
-class Memcached extends Core {
+class MrMemcache {
 
-    protected $memcached;
+    protected $memcache;
 
     protected $config;
 
     public function __construct($config) {
         try { 
             $this->config = $config;
-            if(!extension_loaded('memcached')) {
-                throw new Exception('memcached extension not exists');
+            if(!extension_loaded('memcache')) {
+                throw new Exception('memcache extension not exists');
             }
-            $this->memcached = new \Memcached();
+            $this->memcache = new \Memcache();
             $this->connect();
         } catch (Exception $e) {
             $e->getExceptionMessage();
@@ -37,7 +36,7 @@ class Memcached extends Core {
     private function connect() {
         try {
             if (empty($this->config)) {
-                throw new Exception('memcached config empty');
+                throw new Exception('memcache config empty');
             }
             if (is_array($this->config)) {
                 foreach($this->config as $config) {
@@ -56,20 +55,36 @@ class Memcached extends Core {
         $host = isset($config[0]) ? $config[0]: '';
         $port = isset($config[1]) ? $config[1]: 11211;
         $weight = isset($config[2]) ? $config[2] : 1;
-        if(false === $this->memcached->addServer($host, $port, $weight)) {
+        if(false === $this->memcache->addServer($host, $port, true, $weight, 1)) {
             throw new Exception('Memcached server add failed');
         }
     }
 
-    public function __call($name,$arguments) {
-        try {
-            if (method_exists($this->memcached, $name)) {
-                return call_user_func_array(array($this->memcached, $name), $arguments);
-            } else {
-                throw new Exception('Call to undefined method Memcached::'.$name.'()');
-            }
-        } catch (Exception $e) {
-            $e->getExceptionMessage();
-        }
+    public function add($key, $value, $expire = 0, $flag = false) {
+        return $this->memcache->add($key, $value, $flag, $expire);
+    }
+
+    public function get($key) {
+        return $this->memcache->get($key);
+    }
+
+    public function set($key, $value, $expire = 0, $flag = false) {
+        return $this->memcache->set($key, $value, $flag, $expire);
+    }
+
+    public function replace($key, $value, $expire = 0, $flag = false) {
+        return $this->memcache->replace($key, $value, $flag, $expire);
+    }
+
+    public function delete($key, $expire = 0) {
+        return $this->memcache->delete($key, $expire);
+    }
+
+    public function increment($key, $value = 1) {
+        return $this->memcache->increment($key, $value);
+    }
+
+    public function decrement($key, $value = 1) {
+        return $this->memcache->decrement($key, $value);
     }
 }
