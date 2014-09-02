@@ -10,4 +10,4 @@
  * @link      https://github.com/mrslab/mushroom
  */
 
-require './boot/Bootstrap.php';
+require dirname(__FILE__).'/boot/Bootstrap.php';

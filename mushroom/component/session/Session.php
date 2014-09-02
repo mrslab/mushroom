@@ -38,8 +38,12 @@ class Session implements IFSession {
         return session_id();
     }
 
-    public function get($key) {
-        return isset($_SESSION[$key]) ? $_SESSION[$key] : null;
+    public function get($key = null) {
+        if (null === $key) {
+            return $_SESSION;
+        } else {
+            return isset($_SESSION[$key]) ? $_SESSION[$key] : null;
+        }
     }
 
     public function set($key, $value) {
@@ -83,6 +87,26 @@ class Session implements IFSession {
 
     private function initConfig() {
         isset($this->config['life']) && $this->setSessionLife($this->config['life']);
+        isset($this->config['cookiepath']) && $this->setCookiePath($this->config['cookiepath']);
+        isset($this->config['cookiedomain']) && $this->setCookieDomain($this->config['cookiedomain']);
+        isset($this->config['gc']) && $this->setGcProbability($this->config['gc']);
+        isset($this->config['httponly']) && $this->setHttponly($this->config['httponly']);
+    }
+
+    private function setHttponly($httponly) {
+       ini_set('session.cookie_httponly', $httponly); 
+    }
+
+    private function setGcProbability($gc) {
+       ini_set('session.gc_probability', $gc); 
+    }
+
+    private function setCookieDomain($domain) {
+       ini_set('session.cookie_domain', $domain); 
+    }
+
+    private function setCookiePath($path) {
+        ini_set('session.cookie_path', $path);
     }
 
     private function setSessionLife($life) {
