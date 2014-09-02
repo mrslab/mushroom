@@ -21,16 +21,16 @@ class Cache {
 	private function getCacheObject() {
 		switch($this->config['driver']) {
 			case 'File':
-				$this->cache = new cache\File($this->config);
+				$this->cache = new File($this->config);
 				break;
 			case 'Mysql':
-				$this->cache = new cache\Mysql($this->config);
+				$this->cache = new Mysql($this->config);
 				break;
 			case 'Redis':
-				$this->cache = new cache\Redis($this->config);
+				$this->cache = new Redis($this->config);
 				break;
 			case 'Memcache':
-				$this->cache = new cache\Memcache($this->config);
+				$this->cache = new Memcache($this->config);
 				break;
 		}
 	}
