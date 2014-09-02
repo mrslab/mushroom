@@ -21,7 +21,7 @@ class Mysql extends Connect {
         $dsn .= isset($cfg['charset']) ? ';charset='.$cfg['charset'] : '';
         $config = array(
             'dsn' => $dsn,
-            'user' => isset($cfg['username']) ? $cfg['usenamer']: '',
+            'user' => isset($cfg['username']) ? $cfg['username']: '',
             'pass' => isset($cfg['password']) ? $cfg['password']: '',
             'timeout' => isset($cfg['timeout']) ? $cfg['timeout']: '',
             'tablepre' => isset($cfg['tablepre']) ? $cfg['tablepre']: '',
