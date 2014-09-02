@@ -15,10 +15,14 @@ namespace mushroom\component\mysql;
 class Mysql extends Connect {
 	
     public function __construct($cfg) {
+        $dsn = 'mysql:';
+        $dsn .= isset($cfg['hostname']) ? 'host='.$cfg['hostname'] : '';
+        $dsn .= isset($cfg['dbname']) ? ';dbname='.$cfg['dbname'] : '';
+        $dsn .= isset($cfg['charset']) ? ';charset='.$cfg['charset'] : '';
         $config = array(
-            'dsn' => isset($cfg['dsn']) ? $cfg['dsn']: '',
-            'user' => isset($cfg['user']) ? $cfg['user']: '',
-            'pass' => isset($cfg['pass']) ? $cfg['pass']: '',
+            'dsn' => $dsn,
+            'user' => isset($cfg['username']) ? $cfg['usenamer']: '',
+            'pass' => isset($cfg['password']) ? $cfg['password']: '',
             'timeout' => isset($cfg['timeout']) ? $cfg['timeout']: '',
             'tablepre' => isset($cfg['tablepre']) ? $cfg['tablepre']: '',
         );
