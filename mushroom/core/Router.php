@@ -34,6 +34,9 @@ class Router extends Core {
                 case MR_MODE_CLI:
                     $this->getCliArgs();
                     break;
+                case MR_MODE_REGEXP:
+                    $this->getRegExp();
+                    break;
                 default:
                     throw new Exception('URL route mode error');
             }
@@ -43,7 +46,7 @@ class Router extends Core {
         $this->verifyModeByDef();
     }
 
-    public function verifyModeByDef() {
+    private function verifyModeByDef() {
         if (empty($this->mod)) {
             $this->mod = Core::app()->config->controller;
         }
@@ -55,16 +58,22 @@ class Router extends Core {
         $this->getQueryStringController($this->mod);
     }
 
-    public function getMode() {
+    private function getRegExp() {
+        if (Core::app()->config->route) {
+            
+        }
+    }
+
+    private function getMode() {
         return MR_RT_CLI ? MR_MODE_CLI: Core::app()->config->mode;
     }
 
-    public function getQueryString() {
+    private function getQueryString() {
         $this->mod = Core::app()->get->m;
         $this->act = Core::app()->get->a;
     }
 
-    public function getQuerySegment() {
+    private function getQuerySegment() {
         $pathInfo = Core::app()->server->path_info;
         $path = explode('/', trim($pathInfo, '/'));
         $path = array_filter($path);

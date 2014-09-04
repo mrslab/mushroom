@@ -60,6 +60,10 @@ class RegisterConfig extends Core {
         Core::app()->config->cookie = $cfg;
     }
 
+    public function regRoute($cfg) {
+        Core::app()->config->route = $cfg;
+    }
+
     public function regBase($cfg) {
         $base = Core::app()->config;
         $base->timezone = isset($cfg['timezone']) && !empty($cfg['timezone']) ? $cfg['timezone'] : 8;
