@@ -68,7 +68,6 @@ class RegisterConfig extends Core {
         $base->mode = isset($cfg['mode']) && !empty($cfg['mode']) ? $cfg['mode'] : MR_MODE_QUERY;
         $base->controller = isset($cfg['controller']) && !empty($cfg['controller']) ? $cfg['controller'] : 'index';
         $base->method = isset($cfg['method']) && !empty($cfg['method']) ? $cfg['method'] : 'index';
-        $base->theme = isset($cfg['theme']) ? $cfg['theme'] : 'default';
     }
 
     public function regParam($cfg) {
