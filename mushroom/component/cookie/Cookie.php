@@ -16,13 +16,13 @@ use \mushroom\core\Core as Core;
 
 class Cookie {
 
-    var $path;
+    private $path;
 
-    var $domain;
+    private $domain;
 
-    var $secure;
+    private $secure;
 
-    var $httponly;
+    private $httponly;
 
     public function __construct($config) {
         $this->path = isset($config['path']) ? $config['path']: '/';
