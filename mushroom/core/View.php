@@ -44,7 +44,7 @@ class View extends Core {
 
     public function getTplFile($tpl) {
         try {
-            $file = MR_VIEW_PATH.'/'. (Core::app()->config->theme ? Core::app()->config->theme.'/' : '' ) .$tpl.'.php';
+            $file = MR_VIEW_PATH.'/' .$tpl.'.php';
             if (!is_file($file)) {
                 throw new Exception('template file "'.$file.'" not exists');
             }

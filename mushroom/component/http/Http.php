@@ -27,4 +27,14 @@ class Http {
         curl_close($ch);
         return $result;
     }
+
+    public function downFile($remote, $local) {
+        $cp = curl_init($remote);
+        $fp = fopen($local,"w");
+        curl_setopt($cp, CURLOPT_FILE, $fp);
+        curl_setopt($cp, CURLOPT_HEADER, 0);
+        curl_exec($cp);
+        curl_close($cp);
+        fclose($fp);
+    }
 }

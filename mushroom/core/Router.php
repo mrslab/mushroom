@@ -34,6 +34,9 @@ class Router extends Core {
                 case MR_MODE_CLI:
                     $this->getCliArgs();
                     break;
+                case MR_MODE_REGEXP:
+                    $this->getRegExp();
+                    break;
                 default:
                     throw new Exception('URL route mode error');
             }
@@ -43,7 +46,7 @@ class Router extends Core {
         $this->verifyModeByDef();
     }
 
-    public function verifyModeByDef() {
+    private function verifyModeByDef() {
         if (empty($this->mod)) {
             $this->mod = Core::app()->config->controller;
         }
@@ -55,16 +58,40 @@ class Router extends Core {
         $this->getQueryStringController($this->mod);
     }
 
-    public function getMode() {
+    private function getRegExp() {
+        $route = Core::app()->config->route;
+        $uri = Core::app()->server->request_uri;
+        if ($route && is_array($route)) {
+            foreach($route as $reg => $mod) {
+                preg_match($reg, $uri, $match);
+                if ($match) {
+                    $modArr = explode("::", $mod);
+                    $this->mod = isset($modArr[0]) ? $modArr[0]: '';
+                    $this->act = isset($modArr[1]) ? $modArr[1]: '';
+                    $paramKey = 0;
+                    Core::app()->get->__readonlyAttr(false);
+                    foreach ($match as $val) {
+                        $key = "param".$paramKey;
+                        Core::app()->get->{$key} = $val;
+                        $paramKey++;
+                    }
+                    Core::app()->get->__readonlyAttr(true);
+                    break;
+                }
+            }
+        }
+    }
+
+    private function getMode() {
         return MR_RT_CLI ? MR_MODE_CLI: Core::app()->config->mode;
     }
 
-    public function getQueryString() {
+    private function getQueryString() {
         $this->mod = Core::app()->get->m;
         $this->act = Core::app()->get->a;
     }
 
-    public function getQuerySegment() {
+    private function getQuerySegment() {
         $pathInfo = Core::app()->server->path_info;
         $path = explode('/', trim($pathInfo, '/'));
         $path = array_filter($path);

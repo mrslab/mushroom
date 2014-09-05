@@ -20,7 +20,8 @@ const MR_E_ALL     = 8;
 
 const MR_MODE_QUERY   = 1;
 const MR_MODE_SEGMENT = 2;
-const MR_MODE_CLI     = 99;
+const MR_MODE_CLI     = 3;
+const MR_MODE_REGEXP  = 4;
 
 if (!defined('MR_APP_PATH')) {
     define('MR_APP_PATH', dirname(MR_ROOT_PATH));
