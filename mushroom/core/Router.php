@@ -59,8 +59,26 @@ class Router extends Core {
     }
 
     private function getRegExp() {
-        if (Core::app()->config->route) {
-            
+        $route = Core::app()->config->route;
+        $uri = Core::app()->server->request_uri;
+        if ($route && is_array($route)) {
+            foreach($route as $reg => $mod) {
+                preg_match($reg, $uri, $match);
+                if ($match) {
+                    $modArr = explode("::", $mod);
+                    $this->mod = isset($modArr[0]) ? $modArr[0]: '';
+                    $this->act = isset($modArr[1]) ? $modArr[1]: '';
+                    $paramKey = 0;
+                    Core::app()->get->__readonlyAttr(false);
+                    foreach ($match as $val) {
+                        $key = "param".$paramKey;
+                        Core::app()->get->{$key} = $val;
+                        $paramKey++;
+                    }
+                    Core::app()->get->__readonlyAttr(true);
+                    break;
+                }
+            }
         }
     }
 
