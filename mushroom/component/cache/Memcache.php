@@ -16,7 +16,7 @@ use \mushroom\core\Component as Component;
 
 class Memcache implements IFCache {
 
-    var $memcache;
+    private $memcache;
 
     public function __construct($config) {
         $this->memcache = Component::register('memcache', $config);

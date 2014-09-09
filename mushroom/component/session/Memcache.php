@@ -16,11 +16,11 @@ use \mushroom\core\Component as Component;
 
 class Memcache {
 
-    var $memcache;
+    private $memcache;
 
-    var $config;
+    private $config;
 
-    var $pre = '#mr#sess#';
+    private $pre = '#mr#sess#';
 
     public function __construct($config) {
         $this->config = $config;

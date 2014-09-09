@@ -16,7 +16,7 @@ use \mushroom\core\Component as Component;
 
 class Redis implements IFCache {
 
-    var $redis = null;
+    private $redis = null;
 
     public function __construct($config) {
         $this->redis = Component::register('redis', $config);
