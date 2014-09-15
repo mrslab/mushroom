@@ -14,9 +14,9 @@ namespace mushroom\core;
 
 class Router extends Core {
 
-    var $mod = '';
+    private $mod = '';
 
-    var $act = '';
+    private $act = '';
 
     public function __construct() {
         $this->getRouter();

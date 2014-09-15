@@ -32,6 +32,7 @@ if (!defined('MR_APP_PATH')) {
 !defined('MR_CONTROLLER_PATH') && define('MR_CONTROLLER_PATH', MR_APP_PATH . '/controller');
 !defined('MR_MODEL_PATH')      && define('MR_MODEL_PATH',      MR_APP_PATH . '/model');
 !defined('MR_VIEW_PATH')       && define('MR_VIEW_PATH',       MR_APP_PATH . '/view');
+!defined('MR_FILTER_PATH')     && define('MR_FILTER_PATH',     MR_APP_PATH . '/filter');
 
 !defined('MR_DEV_DEBUG') && define('MR_DEV_DEBUG'         , true);
 

@@ -30,9 +30,9 @@ use \mushroom\core\Core as Core,
 
 class Mysql extends Core implements IFCache {
 
-    var $mysql;
+    private $mysql;
 
-    var $table;
+    private $table;
 
     public function __construct($config) {
         $this->mysql = Component::register('mysql', $config);
