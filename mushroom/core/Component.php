@@ -28,7 +28,8 @@ class Component extends Core {
             if (!isset($config['name']) || !isset($config['config'])) {
                 throw new Exception('component config \''.$comp.'\' error');
             }
-            $this->comps[$comp] = self::register($config['name'], $config['config']);
+            $cfg = isset($config['config']) ? $config['config']: array();
+            $this->comps[$comp] = self::register($config['name'], $cfg);
             return $this->comps[$comp];
         } catch ( Exception $e ) {
             $e->getMessage();
