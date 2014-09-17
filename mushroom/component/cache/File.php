@@ -32,7 +32,7 @@ class File implements IFCache {
             preg_match('/^(\d+)mushroom\/\/\-\-\>/is', $data, $match);
             $life = isset($match[1]) ? $match[1] : 0 ;
             if($life < MR_RT_TIMESTAMP && $life > 0) {
-                MrFile::delete($file);
+                $this->file->delete($file);
                 return false;
             }
             $replace = isset($match[0]) ? $match[0] : '' ;
