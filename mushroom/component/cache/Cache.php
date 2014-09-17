@@ -41,14 +41,14 @@ class Cache {
 	}
 	
 	public function set($key, $value, $expire = 3600) {
-		$this->cache->set($key, $value, $expire);
+		return $this->cache->set($key, $value, $expire);
 	}
 
 	public function get($key) {
-		$this->cache->get($key);
+		return $this->cache->get($key);
 	}
 	
 	public function delete($key) {
-		$this->cache->delete($key);
+		return $this->cache->delete($key);
 	}
 }
