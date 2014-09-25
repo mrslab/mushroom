@@ -23,6 +23,7 @@ class Model extends Core {
         }
         if (!isset(self::$models[$model])) {
             self::$models[$model] = new $modelClass;
+            self::$models[$model]->initAttribute();
         }
         return self::$models[$model];
     }

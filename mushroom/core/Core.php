@@ -24,6 +24,10 @@ class Core {
 
     private $__readonlyAttr = false;
 
+    protected $app = null;
+
+    protected $comp = null;
+
     public static function app() {
         if (self::$__core__ === null) {
             self::$__core__ = new self;
@@ -38,7 +42,12 @@ class Core {
         return self::$__comp__;
     }
 
-    public function end() {
+    protected function initAttribute() {
+        $this->app = self::app();
+        $this->component = self::comp();
+    }
+
+    protected function end() {
         Hook::listen('mr_end');
         define('MR_RT_EMEMORY',   memory_get_usage());
         list($microtime, $second) = explode(' ', microtime());

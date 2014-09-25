@@ -22,8 +22,10 @@ abstract class ActiveRecord extends Core implements IFActiveRecord {
 
     public function __construct() {
         $this->_db_ = $this->dbConnect();
-        $this->_table_ = $this->_db_->tablepr.$this->tableName();
-        $this->_pk_ = $this->tablePrimary();
+        if (is_object($this->_db_)) {
+            $this->_table_ = $this->_db_->tablepr.$this->tableName();
+            $this->_pk_ = $this->tablePrimary();
+        }
     }
 
     public function count($condition = '', $prepare = array()) {

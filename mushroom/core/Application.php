@@ -42,7 +42,10 @@ class Application extends Core {
                 throw new Exception('controller "'.$appClass.'" not exists');
             } 
             Hook::listen('mr_before_controller');
+
             $modObject = new $controllerClass;
+            $modObject->initAttribute();
+
             if (!($modObject instanceof Controller)) {
                 throw new Exception('controller "'.$controllerClass.'" not extend base class \mr\Controller');
             }
@@ -60,7 +63,7 @@ class Application extends Core {
                 call_user_func(array($modObject, $method));
             }
             Hook::listen('mr_after_controller');
-            Core::app()->end();
+            $this->end();
         } catch (Exception $e) {
             $e->getExceptionMessage();
         }
