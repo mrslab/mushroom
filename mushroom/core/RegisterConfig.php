@@ -56,6 +56,10 @@ class RegisterConfig extends Core {
         Core::app()->config->session = $cfg;
     }
 
+    public function regTemplate($cfg) {
+        Core::app()->config->template = $cfg;
+    }
+
     public function regCookie($cfg) {
         Core::app()->config->cookie = $cfg;
     }
