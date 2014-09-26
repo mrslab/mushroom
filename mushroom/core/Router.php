@@ -61,6 +61,7 @@ class Router extends Core {
     private function getRegExp() {
         $route = Core::app()->config->route;
         $uri = Core::app()->server->request_uri;
+        $hasRegRule = false;
         if ($route && is_array($route)) {
             foreach($route as $reg => $mod) {
                 preg_match($reg, $uri, $match);
@@ -76,9 +77,13 @@ class Router extends Core {
                         $paramKey++;
                     }
                     Core::app()->get->__readonlyAttr(true);
+                    $hasRegRule = true;
                     break;
                 }
             }
+        }
+        if (false === $hasRegRule) {
+            throw new Exception("url '{$uri}' not found in route config ");
         }
     }
 
