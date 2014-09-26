@@ -32,6 +32,7 @@ class Init extends Core {
         Common::load('Request');
         Common::load('Hook');
         Common::load('Session');
+        Common::load('Template');
         Common::load('Cookie');
     }
 
