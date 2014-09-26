@@ -42,7 +42,11 @@ class Component extends Core {
             if (!class_exists($compClass)) {
             	throw new Exception('Component error:\''.$compClass.'\' class does not exist');
             }
-            return new $compClass($config);
+            $compObject = new $compClass($config);
+            if (method_exists($compObject, 'init')) {
+                $compObject->init();
+            }
+            return $compObject;
         } catch( Exception $e ) {
             $e->getExceptionMessage();
         }
