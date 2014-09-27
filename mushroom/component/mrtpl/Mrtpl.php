@@ -14,7 +14,7 @@ namespace mushroom\component\mrtpl;
 
 class Mrtpl  extends Compile {
 
-    public function __construct($config) {
+    public function __construct($config = array()) {
         $this->path  = isset($config['path']) ? $config['path']: MR_VIEW_PATH;
         $this->cpath = isset($config['cpath']) ? $config['cpath']: MR_RUNTIME_PATH.'/tpl_cache/';
     }
