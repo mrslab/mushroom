@@ -59,6 +59,7 @@ class Autoloader {
             'mushroom'    => MR_ROOT_PATH,
             'controller'  => MR_CONTROLLER_PATH,
             'model'       => MR_MODEL_PATH,
+            'command'     => MR_COMMAND_PATH,
             'filter'      => MR_FILTER_PATH
         );
         $path = isset($alias[$head]) ? $alias[$head] : MR_APP_PATH . MR_RT_DS . $head;

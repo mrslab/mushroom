@@ -65,11 +65,13 @@ class GetGpcs extends Core {
             $len = count($argv);
             for($i = 1; $i < $len; $i+=2) {
                 $key = isset($argv[$i]) ? $argv[$i]: '';
+                $left3 = substr($key, 0, 3);
+                $left2 = substr($key, 0, 2);
+                $left1 = substr($key, 0, 1);
+                $klen = strlen($key);
                 if (
-                    empty($key) || 
-                    substr($key, 0, 1) != '-' ||
-                    (substr($key, 0, 2) == '--' && strlen($key) < 4) ||
-                    (substr($key, 0, 1) == '-' && strlen($key) != 2)
+                    !( $left2 == '--' && $klen > 4 && $left3 != '---' ) &&
+                    !( $left1 == '-'  && $left2 != '--' && $klen == 2)
                 ) {
                     throw new Exception($argv[0].': invalid option: "'.$key.'"');
                 }
