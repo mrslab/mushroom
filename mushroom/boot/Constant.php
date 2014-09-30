@@ -24,12 +24,13 @@ const MR_MODE_CLI     = 3;
 const MR_MODE_REGEXP  = 4;
 
 if (!defined('MR_APP_PATH')) {
-    define('MR_APP_PATH', dirname(MR_ROOT_PATH));
+    define('MR_APP_PATH', getcwd());
 }
 
 !defined('MR_CONF_PATH')       && define('MR_CONF_PATH',       MR_APP_PATH . '/config');
 !defined('MR_RUNTIME_PATH')    && define('MR_RUNTIME_PATH',    MR_APP_PATH . '/runtime');
 !defined('MR_CONTROLLER_PATH') && define('MR_CONTROLLER_PATH', MR_APP_PATH . '/controller');
+!defined('MR_COMMAND_PATH')    && define('MR_COMMAND_PATH',    MR_APP_PATH . '/command');
 !defined('MR_MODEL_PATH')      && define('MR_MODEL_PATH',      MR_APP_PATH . '/model');
 !defined('MR_VIEW_PATH')       && define('MR_VIEW_PATH',       MR_APP_PATH . '/view');
 !defined('MR_FILTER_PATH')     && define('MR_FILTER_PATH',     MR_APP_PATH . '/filter');
@@ -45,5 +46,9 @@ list($microtime, $second) = explode(' ', microtime());
 define('MR_RT_BTIME', $second + $microtime);
 
 if (!defined('MR_CONF_FILE')) {
-    define('MR_CONF_FILE', MR_CONF_PATH.'/config.php');
+    if (is_file(MR_CONF_PATH.'/config.php')) {
+        define('MR_CONF_FILE', MR_CONF_PATH.'/config.php');
+    } else {
+        define('MR_CONF_FILE', MR_ROOT_PATH.'/boot/Config.php');
+    }
 }

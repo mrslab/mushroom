@@ -33,6 +33,58 @@ class Application extends Core {
     }
 
     private function runProcess() {
+        if (MR_RT_CLI) {
+            if (isset(Core::app()->args->develop)) {
+                $this->runMrCliProcess();
+            } else {
+                $this->runCliProcess();
+            }
+        } else {
+            $this->runWebProcess();
+        }
+    }
+
+    private function runMrCliProcess() {
+        if (empty(Core::app()->args->develop)) {
+            throw new Exception('--develop option value can not empty');
+        }
+        $toolClass = '\\mushroom\\tool\\'.ucfirst(Core::app()->args->develop);
+        if (!class_exists($toolClass)) {
+            throw new Exception('mushroom tools class "'.$toolClass.'" not exists');
+        }
+        $toolObjs = new $toolClass;
+        if (method_exists($toolObjs, 'init')) {
+            call_user_func(array($toolObjs, 'init'));
+        }
+        $this->end();
+    }
+
+    private function runCliProcess() {
+        try {
+            $controller = $this->controller.'Command';
+            $appClass = '\\command\\'.$controller;
+            if (class_exists($appClass)) {
+                $controllerClass = $appClass;
+            }else {
+                throw new Exception('command "'.$appClass.'" not exists');
+            } 
+            $modObject = new $controllerClass;
+            if (!($modObject instanceof Controller)) {
+                throw new Exception('controller "'.$controllerClass.'" not extend base class \mr\Controller');
+            }
+            $method = $this->method.'Cmd';
+            if (!method_exists($modObject, $method)) {
+                throw new Exception('command method "'.$controllerClass.'->'.$method.'()" not exists');
+            } else {
+                call_user_func(array($modObject, $method));
+            }
+            $this->end();
+        } catch (Exception $e) {
+            $e->getExceptionMessage();
+        }
+    }
+
+    private function runWebProcess() {
         try {
             $controller = $this->controller.'Controller';
             $appClass = '\\controller\\'.$controller;
