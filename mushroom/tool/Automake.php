@@ -68,8 +68,8 @@ class Automake extends Core {
     }
 
     private function makeDefaultConfig() {
-        if (!is_file(MR_CONF_FILE)) {
-            copy(MR_ROOT_PATH.'/boot/Config.php', MR_CONF_FILE);
+        if (!is_file(MR_CONF_PATH.'/config.php')) {
+            copy(MR_ROOT_PATH.'/boot/Config.php', MR_CONF_PATH . '/config.php');
         }
     }
 

@@ -24,7 +24,7 @@ const MR_MODE_CLI     = 3;
 const MR_MODE_REGEXP  = 4;
 
 if (!defined('MR_APP_PATH')) {
-    define('MR_APP_PATH', dirname(MR_ROOT_PATH));
+    define('MR_APP_PATH', getcwd());
 }
 
 !defined('MR_CONF_PATH')       && define('MR_CONF_PATH',       MR_APP_PATH . '/config');
