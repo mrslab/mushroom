@@ -72,4 +72,27 @@ class Collection {
         return $this->collection->drop();
     }
 
+    public function getReadPreference() {
+        return $this->collection->getReadPreference();
+    }
+
+    public function getWriteConcern() {
+        return $this->collection->getWriteConcern();
+    }
+
+    public function group($keys, $initial, $reduce) {
+        return $this->collection->group($keys, $initial, $reduce);
+    }
+    
+    public function insert($a, $opts = array()) {
+        return $this->collection->insert($a, $opts);
+    }
+
+    public function parallelCollectionScan($num) {
+        return $this->collection->parallelCollectionScan($num);
+    }
+
+    public function remove($criteria = array(), $opts = array()) {
+        return $this->collection->remove($criteria, $opts);
+    }
 }
