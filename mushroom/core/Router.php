@@ -118,6 +118,7 @@ class Router extends Core {
     }
 
     private function getQueryStringController($mod) {
+        $mod = str_replace('\\', '/', $mod);
         $mod = explode('/', $mod);
         array_filter($mod);
         $last = !empty($mod) ? array_pop($mod): '';
