@@ -17,23 +17,19 @@ class Component extends Core {
     private $comps = array();
 
     public function __get($comp) {
-        try {
-            if (isset($this->comps[$comp])) {
-                return $this->comps[$comp];
-            }
-            if (!isset(Core::app()->config->comp[$comp])) {
-                throw new Exception('component config \''.$comp.'\' not exists');
-            }
-            $config = Core::app()->config->comp[$comp];
-            if (!isset($config['name']) || !isset($config['config'])) {
-                throw new Exception('component config \''.$comp.'\' error');
-            }
-            $cfg = isset($config['config']) ? $config['config']: array();
-            $this->comps[$comp] = self::register($config['name'], $cfg);
+        if (isset($this->comps[$comp])) {
             return $this->comps[$comp];
-        } catch ( Exception $e ) {
-            $e->getMessage();
         }
+        if (!isset(Core::app()->config->comp[$comp])) {
+            throw new \Exception('component config \''.$comp.'\' not exists');
+        }
+        $config = Core::app()->config->comp[$comp];
+        if (!isset($config['name'])) {
+            throw new \Exception('component config \''.$comp.'\' error');
+        }
+        $cfg = isset($config['config']) ? $config['config']: array();
+        $this->comps[$comp] = self::register($config['name'], $cfg);
+        return $this->comps[$comp];
     }
 
     public static function register($name, $config = array()) {

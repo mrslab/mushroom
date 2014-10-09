@@ -26,7 +26,7 @@ class Core {
 
     protected $app = null;
 
-    protected $comp = null;
+    protected $component = null;
 
     public static function app() {
         if (self::$__core__ === null) {

@@ -12,7 +12,7 @@
 
 namespace mushroom\component\session;
 
-use \mushroom\core\Component as Component;
+use \mushroom\core\Core as Core;
 
 class File {
 
@@ -22,7 +22,7 @@ class File {
 
     public function __construct($config) {
         $this->path = isset($config['path']) ? $config['path']: MR_RUNTIME_PATH .'/session';
-        $this->file = Component::register('file');
+        $this->file = Core::comp()->util->file;
         $this->init();
     }
 
