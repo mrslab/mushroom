@@ -22,7 +22,7 @@ class File implements IFCache {
 
     public function __construct($config) {
         $this->path = isset($config['path']) && !empty($config['path']) ? $config['path'] : MR_RUNTIME_PATH . '/cache';
-        $this->file = Component::register('file');
+        $this->file = Core::comp()->util->file;
     }
 
     public function get($key) {

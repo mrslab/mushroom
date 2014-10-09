@@ -10,7 +10,7 @@
  * @link      https://github.com/mrslab/mushroom
  */
 
-namespace mushroom\component\string;
+namespace mushroom\component\util;
 
 class String {
 

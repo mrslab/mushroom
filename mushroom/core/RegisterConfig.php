@@ -26,6 +26,9 @@ class RegisterConfig extends Core {
         if (!isset($this->config['base'])) {
             $this->config['base'] = array();
         }
+        if (!isset($this->config['comp']) || !isset($this->config['comp']['util'])) {
+            $this->config['comp']['util'] = array('name' => 'util');
+        }
         Core::app()->global = new Core;
         Core::app()->config = new Core;
         Core::app()->param = new Core;

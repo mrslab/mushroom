@@ -10,24 +10,18 @@
  * @link      https://github.com/mrslab/mushroom
  */
 
-namespace mushroom\component\file;
-
-use \mushroom\core\Exception as Exception;
+namespace mushroom\component\util;
 
 class File {
 
     public function mkdir($path) {
-        try {
-            $dir = $path;
-            if(!is_dir($dir)) {
-                if(!mkdir($dir, 0755, true)) {
-                    throw new Exception('"{$dir}" directory create failed');
-                }
+        $dir = $path;
+        if(!is_dir($dir)) {
+            if(!mkdir($dir, 0755, true)) {
+                throw new \Exception('"{$dir}" directory create failed');
             }
-            return true;
-        } catch (Exception $e) {
-            $e->getExceptionMessage();
         }
+        return true;
     }
 
     public function read($file) {
@@ -40,16 +34,12 @@ class File {
     }
 
     public function write($file, $data, $file_append = false) {
-        try {
-            if (true === $this->mkdir(dirname($file))) {
-                if (false === file_put_contents($file, $data, $file_append ? FILE_APPEND : 0)) {
-                    throw new Exception('file "'.$file.'" write failed');
-                }
+        if (true === $this->mkdir(dirname($file))) {
+            if (false === file_put_contents($file, $data, $file_append ? FILE_APPEND : 0)) {
+                throw new \Exception('file "'.$file.'" write failed');
             }
-            return true;
-        } catch (Exception $e) {
-            $e->getExceptionMessage();
         }
+        return true;
     }
 
     public function delete($file) {
@@ -58,7 +48,7 @@ class File {
                 return false;
             }
             return unlink($file);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $e->getExceptionMessage();
         }
     }

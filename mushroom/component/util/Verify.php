@@ -10,7 +10,7 @@
  * @link      https://github.com/mrslab/mushroom
  */
 
-namespace mushroom\component\verify;
+namespace mushroom\component\util;
 
 class Verify {
 
