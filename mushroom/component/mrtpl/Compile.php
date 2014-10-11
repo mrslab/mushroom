@@ -43,8 +43,8 @@ class Compile {
     protected function getCompTplFile($file) {
         try {
             if (!is_dir($this->cpath)) {
-                if (!mkdir($path, 0755, true)) {
-                    throw new \Exception('failed to create directory "'.$path.'"');
+                if (!mkdir($this->cpath, 0755, true)) {
+                    throw new \Exception('failed to create directory "'.$this->cpath.'"');
                 }
             }
         } catch (Exception $e) {
@@ -55,7 +55,7 @@ class Compile {
 
     protected function getTplFile($tpl) {
         try {
-            $file = $this->path. MR_RT_DS .$tpl.'.php';
+            $file = $this->path. MR_RT_DS .$tpl;
             if (!is_file($file)) {
                 throw new \Exception('template file "'.$file.'" not exists');
             }
